@@ -65,7 +65,7 @@ class LTV(FFBSi, ParticleFiltering):
         dim = lz + lz * lz
         particles = numpy.empty((N, dim))
 
-        for i in xrange(N):
+        for i in range(N):
             particles[i, :lz] = numpy.copy(self.z0).ravel()
             particles[i, lz:] = numpy.copy(self.P0).ravel()
         return particles
@@ -82,7 +82,7 @@ class LTV(FFBSi, ParticleFiltering):
         """
         lz = len(self.z0)
         N = len(particles)
-        for i in xrange(N):
+        for i in range(N):
             particles[i, :lz] = z_list[i].ravel()
             lzP = lz + lz * lz
             particles[i, lz:lzP] = P_list[i].ravel()
@@ -104,7 +104,7 @@ class LTV(FFBSi, ParticleFiltering):
         zl = list()
         Pl = list()
         lz = len(self.z0)
-        for i in xrange(N):
+        for i in range(N):
             zl.append(particles[i, :lz].reshape(-1, 1))
             lzP = lz + lz * lz
             Pl.append(particles[i, lz:lzP].reshape(self.P0.shape))
@@ -151,7 +151,7 @@ class LTV(FFBSi, ParticleFiltering):
         (zl, Pl) = self.get_states(particles)
         (A, f, Q) = self.get_pred_dynamics(u=u, t=t)
         self.kf.set_dynamics(A=A, Q=Q, f_k=f)
-        for i in xrange(len(zl)):
+        for i in range(len(zl)):
             # Predict z_{t+1}
             (zl[i], Pl[i]) = self.kf.predict(zl[i], Pl[i])
 
@@ -201,7 +201,7 @@ class LTV(FFBSi, ParticleFiltering):
         (y, C, h, R) = self.get_meas_dynamics(y=y, t=t)
         self.kf.set_dynamics(C=C, R=R, h_k=h)
         lyz = numpy.empty((len(particles)))
-        for i in xrange(len(zl)):
+        for i in range(len(zl)):
             # Predict z_{t+1}
             lyz[i] = self.kf.measure(y, zl[i], Pl[i])
 
@@ -274,7 +274,7 @@ class LTV(FFBSi, ParticleFiltering):
         lz = len(self.z0)
         lzP = lz + lz * lz
         res = numpy.empty((M, lz + 2 * lz ** 2))
-        for j in xrange(M):
+        for j in range(M):
             if (future_trajs is not None):
                 zn = future_trajs[0].pa.part[j, :lz].reshape((lz, 1))
                 Pn = future_trajs[0].pa.part[j, lz:lzP].reshape((lz, lz))
@@ -318,7 +318,7 @@ class LTV(FFBSi, ParticleFiltering):
         N = len(particles)
         (zl, Pl) = self.get_states(particles)
         lpz0 = numpy.empty(N)
-        for i in xrange(N):
+        for i in range(N):
             l1 = self.calc_l1(zl[i], Pl[i], self.z0, self.P0)
             (_tmp, ld) = numpy.linalg.slogdet(self.P0)
             tmp = numpy.linalg.solve(self.P0, l1)
@@ -346,7 +346,7 @@ class LTV(FFBSi, ParticleFiltering):
             lpz0 = 0.0
             P0cho = scipy.linalg.cho_factor(self.P0)
             ld = numpy.sum(numpy.log(numpy.diagonal(P0cho[0]))) * 2
-            for i in xrange(N):
+            for i in range(N):
                 (l1, l1_grad) = self.calc_l1_grad(zl[i], Pl[i], self.z0, self.P0, z0_grad)
                 tmp = scipy.linalg.cho_solve(P0cho, l1)
                 lpz0 += -0.5 * (ld + numpy.trace(tmp))
@@ -377,7 +377,7 @@ class LTV(FFBSi, ParticleFiltering):
         self.t = t
         lpxn = numpy.empty(N)
 
-        for k in xrange(N):
+        for k in range(N):
             lz = len(self.z0)
             lzP = lz + lz * lz
             Mz = particles[k][lzP:].reshape((lz, lz))
@@ -419,7 +419,7 @@ class LTV(FFBSi, ParticleFiltering):
             if (Q_grad is None):
                 Q_grad = numpy.zeros((len(self.params), self.kf.lz, self.kf.lz))
 
-            for k in xrange(N):
+            for k in range(N):
                 lz = len(self.z0)
                 lzP = lz + lz * lz
                 Mz = particles[k][lzP:].reshape((lz, lz))
@@ -451,7 +451,7 @@ class LTV(FFBSi, ParticleFiltering):
         self.kf.set_dynamics(C=C, R=R, h_k=h)
         (zl, Pl) = self.get_states(particles)
         logpy = numpy.empty(N)
-        for i in xrange(N):
+        for i in range(N):
             # Calculate l3 according to (19b)
             l3 = self.calc_l3(y, zl[i], Pl[i])
             (_tmp, ld) = numpy.linalg.slogdet(self.kf.R)
@@ -490,7 +490,7 @@ class LTV(FFBSi, ParticleFiltering):
             if (R_grad is None):
                 R_grad = numpy.zeros((len(self.params), len(y), len(y)))
 
-            for i in xrange(N):
+            for i in range(N):
             # Calculate l3 according to (19b)
                 # Calculate l3 according to (19b)
                 (l3, l3_grad) = self.calc_l3_grad(y, zl[i], Pl[i])
@@ -565,7 +565,7 @@ class LTV(FFBSi, ParticleFiltering):
         l1 = z0_diff.dot(z0_diff.T) + P
         l1_diff = numpy.zeros((lparams, self.kf.lz, self.kf.lz))
         if (z0_grad is not None):
-            for j in xrange(lparams):
+            for j in range(lparams):
                 tmp = -z0_grad[j].dot(z0_diff.T)
                 l1_diff[j] += tmp + tmp.T
         return (l1, l1_diff)
@@ -587,11 +587,11 @@ class LTV(FFBSi, ParticleFiltering):
         l2 += Pn + A.dot(P).dot(A.T) - AM.T - AM
         l2_grad = numpy.zeros((lparam, self.kf.lz, self.kf.lz))
         if (f_grad is not None):
-            for j in xrange(lparam):
+            for j in range(lparam):
                 tmp = -f_grad[j].dot(predict_err.T)
                 l2_grad[j] += tmp + tmp.T
         if (A_grad is not None):
-            for j in xrange(lparam):
+            for j in range(lparam):
                 tmp = -A_grad[j].dot(z).dot(predict_err.T)
                 l2_grad[j] += tmp + tmp.T
                 tmp = A_grad[j].dot(P).dot(A.T)
@@ -621,11 +621,11 @@ class LTV(FFBSi, ParticleFiltering):
         l3 += self.kf.C.dot(P).dot(self.kf.C.T)
         l3_grad = numpy.zeros((lparam, len(y), len(y)))
         if (h_grad is not None):
-            for j in xrange(lparam):
+            for j in range(lparam):
                 tmp = -h_grad[j].dot(meas_diff)
                 l3_grad[j] += tmp + tmp.T
         if (C_grad is not None):
-            for j in xrange(lparam):
+            for j in range(lparam):
                 tmp = -C_grad[j].dot(z).dot(meas_diff)
                 l3_grad[j] += tmp + tmp.T
                 tmp = C_grad[j].dot(P).dot(self.kf.C)

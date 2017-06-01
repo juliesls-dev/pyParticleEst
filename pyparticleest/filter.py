@@ -1013,7 +1013,7 @@ class ParticleTrajectory(object):
         Returns:
          SmoothTrajectory object containing the smoothed estimates
         """
-        from smoother import SmoothTrajectory
+        from pyparticleest.smoother import SmoothTrajectory
 
         options = {}
         if (method == 'rs' or method == 'rsas'):

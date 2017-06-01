@@ -147,7 +147,7 @@ class NonlinearGaussian(interfaces.ParticleFiltering, interfaces.FFBSiRS):
         if (Q is None):
             noise = self.Qcholtri.T.dot(noise)
         else:
-            for i in xrange(N):
+            for i in range(N):
                 Qchol = numpy.triu(scipy.linalg.cho_factor(Q[i], check_finite=False)[0])
                 noise[:, i] = Qchol.T.dot(noise[:, i])
 
@@ -206,7 +206,7 @@ class NonlinearGaussian(interfaces.ParticleFiltering, interfaces.FFBSiRS):
                 lpy = kalman.lognormpdf_cho_vec(diff, self.Rchol)
         else:
             lpy = numpy.empty(N)
-            for i in xrange(N):
+            for i in range(N):
                 Rchol = scipy.linalg.cho_factor(R[i], check_finite=False)
                 lpy[i] = kalman.lognormpdf_cho(diff[i], Rchol)
 
@@ -258,7 +258,7 @@ class NonlinearGaussian(interfaces.ParticleFiltering, interfaces.FFBSiRS):
         else:
             N = len(particles)
             pmax = numpy.empty(N)
-            for i in xrange(N):
+            for i in range(N):
                 Qchol = scipy.linalg.cho_factor(Q[i], check_finite=False)
                 ld = numpy.sum(numpy.log(numpy.diag(Qchol[0]))) * 2
                 pmax[i] = -0.5 * (dim * l2pi + ld)
@@ -294,7 +294,7 @@ class NonlinearGaussian(interfaces.ParticleFiltering, interfaces.FFBSiRS):
         else:
             N = len(particles)
             lpx = numpy.empty(N)
-            for i in xrange(N):
+            for i in range(N):
                 Qchol = scipy.linalg.cho_factor(Q[i], check_finite=False)
                 lpx[i] = kalman.lognormpdf_cho(diff[i], Qchol)
 
@@ -433,14 +433,14 @@ class NonlinearGaussianInitialGaussian(NonlinearGaussian):
         # Assumes Px0 is either full rang or zero
         if ((self.Px0 == 0.0).all()):
             x0 = self.x0.ravel()
-            for i in xrange(N):
+            for i in range(N):
                 if (numpy.array_equiv(particles[i], x0)):
                     res[i] = 0.0
                 else:
                     res[i] = -numpy.Inf
         else:
             Pchol = scipy.linalg.cho_factor(self.Px0, check_finite=False)
-            for i in xrange(N):
+            for i in range(N):
                 res[i] = kalman.lognormpdf_cho(particles[i].ravel() - self.x0.ravel(), Pchol)
 
         return res

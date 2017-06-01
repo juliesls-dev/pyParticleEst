@@ -31,7 +31,7 @@ def lognormpdf_cho_vec(err, Schol):
     dim = err.shape[1]
     ld = np.sum(np.log(np.diag(Schol[0]))) * 2
     res = np.ones((N,)) * (-0.5 * (dim * l2pi + ld))
-    for i in xrange(N):
+    for i in range(N):
         res[i] += -0.5 * scipy.linalg.cho_solve(Schol, err[i], check_finite=False).T.dot(err[i])
     return res
 

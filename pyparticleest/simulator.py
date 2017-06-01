@@ -6,7 +6,7 @@ framework.
 """
 
 import numpy
-from filter import ParticleTrajectory
+from pyparticleest.filter import ParticleTrajectory
 
 class Simulator():
     """
@@ -129,7 +129,7 @@ class Simulator():
 
         w = numpy.empty((T, N))
 
-        for t in xrange(T):
+        for t in range(T):
             wtmp = numpy.exp(self.pt.traj[t].pa.w)
             w[t] = wtmp / numpy.sum(wtmp)
             est[t] = self.pt.traj[t].pa.part
@@ -153,7 +153,7 @@ class Simulator():
         D = self.pt.traj[0].pa.part.shape[1]
 
         mean = numpy.empty((T, D))
-        for t in xrange(T):
+        for t in range(T):
             mean[t] = numpy.sum((w[t].ravel() * est[t].T).T, 0)
 
         return mean

@@ -17,8 +17,8 @@ def compute_logprod_derivative(Alup, dA, B, dB):
 #def compute_l2_grad_f_slow(N, lenp, dim, out, perr, f_grad, tmp):
 #    diff_l2 = np.zeros((N, lenp, dim, dim))
 #    if (f_grad is not None):
-#        for i in xrange(N):
-#            for j in xrange(lenp):
+#        for i in range(N):
+#            for j in range(lenp):
 #                tmp = f_grad[i][j].dot(perr[i].T)
 #                diff_l2[i,j,:,:] -= tmp + tmp.T
 #    out += diff_l2
@@ -43,8 +43,8 @@ def compute_l2_grad_A(N, lenp, dim,
     # tmp1 ~ (dim, dim)
     # tmp2 ~(dim, dim-lxi)
 
-    for i in xrange(N):
-        for j in xrange(lenp):
+    for i in range(N):
+        for j in range(lenp):
 
             #A_grad[i,j].dot(zl[i],tmp2[:,0]) (dim,1)
             for k in range(dim):
@@ -102,11 +102,11 @@ def compute_l2_grad_A(N, lenp, dim,
 #                    out[i,j,<unsigned int>(lxi+k),<unsigned int>(lxi+l)] += Pn[i,k,l]
 
 def compute_pred_err(N, dim, xn, f, A, zl, out):
-    for i in xrange(N):
+    for i in range(N):
         out[i] = xn[i] - f[i] - A[i].dot(zl[i])
 
 def compute_l2(N, lxi, dim, perr, Pn, A, Pl, M, out):
-    for i in xrange(N):
+    for i in range(N):
 
         out[i] = perr[i].dot(perr[i].T) + A[i].dot(Pl[i]).dot(A[i].T)
 

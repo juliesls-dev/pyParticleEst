@@ -302,7 +302,7 @@ class RBPFBase(interfaces.ParticleFiltering):
         (Az, fz, Qz) = self.calc_cond_dynamics(particles=particles, xi_next=xi_next, u=u, t=t)
         (_, zl, Pl) = self.get_states(particles)
         # Predict next states conditioned on xi_next
-        for i in xrange(len(zl)):
+        for i in range(len(zl)):
             # Predict z_{t+1}
             (zl[i], Pl[i]) = self.kf.predict_full(z=zl[i], P=Pl[i], A=Az[i], f_k=fz[i], Q=Qz[i])
 
@@ -360,7 +360,7 @@ class RBPSBase(RBPFBase, interfaces.FFBSiRS):
                                       ftraj[-1].ancestors)
 
         # Backward smoothing
-        for i in reversed(xrange(T - 1)):
+        for i in reversed(range(T - 1)):
             (xin, zn, Pn) = self.get_states(straj[i + 1].pa.part)
             particles = numpy.zeros((M, lx))
             particles[:, :lx_filt] = ftraj[i].pa.part
@@ -372,7 +372,7 @@ class RBPSBase(RBPFBase, interfaces.FFBSiRS):
             (xi, z, P) = self.get_states(particles)
             (Al, fl, Ql) = self.calc_cond_dynamics(particles, xin, u=st.u[i], t=st.t[i])
             # Update distribution for linear states
-            for j in xrange(M):
+            for j in range(M):
                 (zs, Ps, Ms) = self.kf.smooth(z[j], P[j], zn[j], Pn[j],
                                               Al[j], fl[j], Ql[j])
                 self.set_states(straj[i].pa.part[j:j + 1, :], xi[j], zs[numpy.newaxis], Ps[numpy.newaxis])
@@ -407,7 +407,7 @@ class RBPSBase(RBPFBase, interfaces.FFBSiRS):
         (z0, P0) = self.get_rb_initial(xil)
         self.set_states(particles, xil, z0, P0)
 
-        for i in xrange(T - 1):
+        for i in range(T - 1):
             if (st.y[i] is not None):
                 self.measure(particles, y=st.y[i], t=st.t[i])
 
