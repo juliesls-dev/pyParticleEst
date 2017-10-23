@@ -102,7 +102,7 @@ class Model(interfaces.FFBSiRS, interfaces.ParticleFiltering,
         return numpy.sum(kalman.lognormpdf_scalar(diff.ravel(), self.R)) / M
 
 def callback(params, Q, cur_iter):
-    print "params = %s" % numpy.exp(params)
+    print("params = %s" % numpy.exp(params))
 
 
 def callback_sim(estimator):

@@ -52,7 +52,7 @@ if __name__ == '__main__':
     plt.ion()
     plt.show()
     time.sleep(5)
-    for _ in xrange(30):
+    for _ in range(30):
 
         plt.clf()
         plt.plot(range(steps + 1), x, 'r-')
@@ -68,9 +68,9 @@ if __name__ == '__main__':
     plt.plot(range(steps + 1), x, 'r-')
     plt.plot(range(1, steps + 1), y, 'bx')
     plt.plot(range(steps + 1), sim.get_smoothed_estimates()[:, :, 0], 'g.')
-#    for k in xrange(num):
+#    for k in range(num):
 #        ind = k
-#        for j in reversed(xrange(len(traj.traj)-1)):
+#        for j in reversed(range(len(traj.traj)-1)):
 #            ind = traj.traj[j+1].ancestors[ind]
 #            vals[k,j] = numpy.copy(traj.traj[j].pa.part[ind])
 

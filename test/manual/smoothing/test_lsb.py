@@ -143,7 +143,7 @@ if __name__ == '__main__':
 
                 rmse_eta = numpy.sqrt(numpy.mean(sqr_err_eta[k, :]))
                 rmse_theta = numpy.sqrt(numpy.mean(sqr_err_theta[k, :]))
-                print "%d %f %f" % (k, numpy.mean(rmse_eta), numpy.mean(rmse_theta))
+                print("%d %f %f" % (k, numpy.mean(rmse_eta), numpy.mean(rmse_theta)))
 
     else:
 
@@ -202,4 +202,4 @@ if __name__ == '__main__':
         plt.ioff()
         plt.show()
         plt.draw()
-    print "exit"
+    print("exit")

@@ -56,7 +56,7 @@ if __name__ == '__main__':
     vals = numpy.empty((num, steps + 1))
     (parts, _) = sim.get_filtered_estimates()
     mvals = sim.get_filtered_mean()
-    for k in xrange(len(parts)):
+    for k in range(len(parts)):
         plt.plot((k,) * num, parts[k, :, 0], 'k.', markersize=1.0)
 
     plt.plot(range(steps + 1), mvals, 'k-')

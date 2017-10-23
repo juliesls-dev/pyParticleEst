@@ -61,7 +61,7 @@ z0 = numpy.array([0.0, 1.0, ])
 P0 = numpy.eye(2)
 
 def callback(params, Q):
-    print "Q=%f, params=%s" % (Q, params)
+    print("Q=%f, params=%s" % (Q, params))
     return
 
 if __name__ == '__main__':
@@ -124,7 +124,7 @@ if __name__ == '__main__':
         fig2 = plt.figure()
 
         for k in range(sims):
-            print k
+            print(k)
             # Create reference
             (y, x) = generate_reference(z0, P0, theta_true, steps)
 
@@ -137,7 +137,7 @@ if __name__ == '__main__':
             pe.set_params(numpy.array((theta_guess,)).reshape((-1, 1)))
 
             # ParamEstimator.simulate(num_part=num, num_traj=nums)
-            print "maximization start"
+            print("maximization start")
 #            (param, Qval) = pe.maximize(param0=numpy.array((theta_guess,)), num_part=num, num_traj=nums,
 #                                        max_iter=max_iter, callback_sim=callback_sim, tol=tol, callback=callback,
 #                                        analytic_gradient=False)
@@ -157,9 +157,9 @@ if __name__ == '__main__':
 
     plt.ioff()
     if (not gradient_test):
-        print "mean: %f" % numpy.mean(estimate)
-        print "stdd: %f" % numpy.std(estimate)
+        print("mean: %f" % numpy.mean(estimate))
+        print("stdd: %f" % numpy.std(estimate))
         plt.hist(estimate.T)
         plt.show()
         plt.draw()
-    print "exit"
+    print("exit")

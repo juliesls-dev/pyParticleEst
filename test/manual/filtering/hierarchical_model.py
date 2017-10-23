@@ -48,7 +48,7 @@ class Model(HierarchicalRSBase):
     def create_initial_estimate(self, N):
         particles = numpy.zeros((N, self.lxi + self.kf.lz + 2 * self.kf.lz ** 2))
 
-        for i in xrange(N):
+        for i in range(N):
             particles[i, 0] = numpy.random.normal(0.0, math.sqrt(self.P0_xi))
             particles[i, 1:3] = numpy.zeros((1, 2))
             particles[i, 3:7] = numpy.copy(self.P0_z).ravel()
@@ -69,7 +69,7 @@ class Model(HierarchicalRSBase):
     def calc_xi_next(self, particles, u, t, noise):
         N = len(particles)
         xi_next = numpy.empty(N)
-        for i in xrange(N):
+        for i in range(N):
             xi_next[i] = particles[i][0] + noise[i]
         return xi_next
 
@@ -84,7 +84,7 @@ class Model(HierarchicalRSBase):
     def measure_nonlin(self, particles, y, t):
         N = len(particles)
         lpy = numpy.empty((N,))
-        for i in xrange(N):
+        for i in range(N):
             lpy[i] = kalman.lognormpdf(y[0] - particles[i][0], self.R_xi)
         return lpy
 
@@ -101,7 +101,7 @@ class Model(HierarchicalRSBase):
             """
         N = len(particles)
         Az = numpy.empty((N, 2, 2))
-        for i in xrange(N):
+        for i in range(N):
             Az[i] = numpy.asarray(((math.cos(particles[i][0]), math.sin(particles[i][0])),
                                   (-math.sin(particles[i][0]), math.cos(particles[i][0])))
                                   )
@@ -110,7 +110,7 @@ class Model(HierarchicalRSBase):
     def get_lin_meas_dynamics(self, particles, y, t):
         N = len(particles)
         Cz = numpy.empty((N, 1, 2))
-        for i in xrange(N):
+        for i in range(N):
             Cz[i] = numpy.asarray(((math.cos(particles[i][0]), math.sin(particles[i][0])),))
 
         return (y[1], Cz, None, None)
@@ -147,7 +147,7 @@ if __name__ == '__main__':
     for k in range(steps + 1):
         plt.plot((k,) * num, parts[k, :, 0], 'r.', markersize=1.0)
 
-    for j in xrange(nums):
+    for j in range(nums):
         plt.plot(range(steps + 1), sest[:, j, 0], 'r--')
         plt.plot(range(steps + 1), sest[:, j, 1], 'g--')
         plt.plot(range(steps + 1), sest[:, j, 2], 'b--')

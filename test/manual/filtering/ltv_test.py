@@ -22,7 +22,7 @@ def generate_dataset(steps, z0, P0, Q, R):
     return (x, y)
 
 # def calc_stuff(out, y, particles, N, R):
-#    for k in xrange(N):
+#    for k in range(N):
 #        out[k] = kalman.lognormpdf(particles[k].reshape(-1,1), y, R)
 #    return out
 
@@ -43,7 +43,7 @@ class Model(LTV):
 
 
 def callback(params, Q):
-    print "params = %s" % numpy.exp(params)
+    print("params = %s" % numpy.exp(params))
 
 
 def callback_sim(estimator):

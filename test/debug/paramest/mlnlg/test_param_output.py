@@ -117,7 +117,7 @@ if __name__ == '__main__':
 
 
         sest = gt.straj.get_smoothed_estimates()
-        for j in xrange(nums):
+        for j in range(nums):
             plt.plot(range(steps + 1), sest[:, j, 0], 'g--')
             plt.plot(range(steps + 1), sest[:, j, 1], 'k--')
             plt.plot(range(steps + 1), sest[:, j, 1] - numpy.sqrt(sest[:, j, 2]), 'k-.')
@@ -154,10 +154,10 @@ if __name__ == '__main__':
             # Create reference
             (u, y, x) = generate_reference(uvec, steps, theta_true)
 
-            print "estimation start"
+            print("estimation start")
             # Initial guess (-5, 5)
             theta_guess = 10.0 * numpy.random.uniform() - 5.0
-            print theta_guess
+            print(theta_guess)
             model = ParticleParamOutput((theta_guess,))
             pe = param_est.ParamEstimation(model, u=u, y=y)
             pe.set_params(numpy.array((theta_guess,)).reshape((-1, 1)))
@@ -198,7 +198,7 @@ if __name__ == '__main__':
 
 
             sest = pe.straj.get_smoothed_estimates()
-            for j in xrange(nums[-1]):
+            for j in range(nums[-1]):
                 plt.plot(range(steps + 1), sest[:, j, 0], 'g--')
                 plt.plot(range(steps + 1), sest[:, j, 1], 'k--')
                 plt.plot(range(steps + 1), sest[:, j, 1] - numpy.sqrt(sest[:, j, 2]), 'k-.')
@@ -217,8 +217,8 @@ if __name__ == '__main__':
 
         plt.ioff()
 
-        print "mean: %f" % numpy.mean(estimate)
-        print "stdd: %f" % numpy.std(estimate)
+        print("mean: %f" % numpy.mean(estimate))
+        print("stdd: %f" % numpy.std(estimate))
 
         plt.clf()
         plt.hist(estimate[0, :(k + 1)].T,
@@ -227,4 +227,4 @@ if __name__ == '__main__':
         plt.ioff()
         plt.show()
         plt.draw()
-    print "exit"
+    print("exit")

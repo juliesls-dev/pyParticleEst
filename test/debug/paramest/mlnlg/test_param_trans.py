@@ -114,7 +114,7 @@ if __name__ == '__main__':
         plt.plot(range(steps + 1), x[:, 1], 'b-')
 
         sest = gt.straj.get_smoothed_estimates()
-        for j in xrange(nums):
+        for j in range(nums):
             plt.plot(range(steps + 1), sest[:, j, 0], 'g--')
             plt.plot(range(steps + 1), sest[:, j, 1], 'k--')
             plt.plot(range(steps + 1), sest[:, j, 1] - numpy.sqrt(sest[:, j, 2]), 'k-.')
@@ -152,7 +152,7 @@ if __name__ == '__main__':
 #        fig4 = plt.figure()
 
         for k in range(sims):
-            print k
+            print(k)
 
             x0 = numpy.vstack((xi0_true, z0_true))
             (y, x) = generate_reference(x0, P0, theta_true, steps)
@@ -160,7 +160,7 @@ if __name__ == '__main__':
             # Create an array for our particles
 
 
-            print "estimation start"
+            print("estimation start")
 
             plt.figure(fig1.number)
             plt.clf()
@@ -206,7 +206,7 @@ if __name__ == '__main__':
 
             plt.figure(fig1.number)
 
-            print "maximization start"
+            print("maximization start")
 
             estimate[0, k] = param
 
@@ -219,12 +219,12 @@ if __name__ == '__main__':
             plt.show()
             plt.draw()
 
-        print "mean: %f" % numpy.mean(estimate)
-        print "stdd: %f" % numpy.std(estimate)
+        print("mean: %f" % numpy.mean(estimate))
+        print("stdd: %f" % numpy.std(estimate))
 
         plt.ioff()
         plt.clf()
         plt.hist(estimate.T, normed=True)
         plt.show()
         plt.draw()
-    print "exit"
+    print("exit")

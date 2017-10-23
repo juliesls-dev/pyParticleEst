@@ -38,7 +38,7 @@ class Model(interfaces.SIR):
         P = self.Q
         S = C.dot(P).dot(C.T) + self.R
         Pn = P - P.dot(C.T).dot(scipy.linalg.solve(S, C.dot(P)))
-        for i in xrange(len(pnext)):
+        for i in range(len(pnext)):
             m = particles[i] + P.dot(C.T).dot(scipy.linalg.solve(S, err[i].reshape((-1, 1)))).ravel()
             pnext[i] = numpy.random.multivariate_normal(m, Pn).ravel()
 
@@ -51,7 +51,7 @@ class Model(interfaces.SIR):
         P = self.Q
         S = C.dot(P).dot(C.T) + self.R
         Pn = P - P.dot(C.T).dot(scipy.linalg.solve(S, C.dot(P)))
-        for i in xrange(len(logpq)):
+        for i in range(len(logpq)):
             m = particles[i] + P.dot(C.T).dot(scipy.linalg.solve(S, err[i].reshape((-1, 1)))).ravel()
             logpq[i] = kalman.lognormpdf(m.reshape((-1, 1)) - next_part[i].reshape((-1, 1)), Pn).ravel()
 

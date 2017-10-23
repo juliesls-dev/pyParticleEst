@@ -13,7 +13,6 @@ except ImportError:
     print("Falling back to pure python implementaton, expect horrible performance")
     import pyparticleest.utils.kalman as kalman
 
-from exceptions import ValueError
 
 class NonlinearGaussian(interfaces.ParticleFiltering, interfaces.FFBSiRS):
     """

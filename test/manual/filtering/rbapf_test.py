@@ -129,7 +129,7 @@ class ParticleAPF_EKF(ParticleAPF):
 
         lyz = numpy.empty(N)
         l2pi = math.log(2 * math.pi)
-        for i in xrange(N):
+        for i in range(N):
             lyz[i] = -0.5 * (l2pi + logRext[i, 0, 0] + (diff[i].ravel() ** 2) / Rext[i, 0, 0])
         return lyz
 
@@ -151,7 +151,7 @@ class ParticleAPF_UKF(ParticleAPF):
 
         Az = pz
 
-        for i in xrange(N):
+        for i in range(N):
             m = numpy.vstack((zl[i], numpy.zeros((3, 1))))
             K = scipy.linalg.block_diag(Pl[i], Qxi[i], self.kf.Q, self.kf.R)
             Na = len(K)
@@ -160,7 +160,7 @@ class ParticleAPF_UKF(ParticleAPF):
 
             ypred = numpy.empty(2 * Na)
             # Some ugly hard-coding here of the function g
-            for j in xrange(Na):
+            for j in range(Na):
                 val = m + Kroot[:, j:j + 1]
                 xin = fxi[i] + Axi[i].dot(val[:1]) + val[1]
                 zn = Az * val[0] + val[2]
@@ -179,7 +179,7 @@ class ParticleAPF_UKF(ParticleAPF):
 
         lyz = numpy.empty(N)
         l2pi = math.log(2 * math.pi)
-        for i in xrange(N):
+        for i in range(N):
             lyz[i] = -0.5 * (l2pi + logRext[i] + (diff[i].ravel() ** 2) / Rext[i])
         return lyz
 
@@ -204,7 +204,7 @@ if __name__ == '__main__':
 
             mode = sys.argv[2]
 
-            print "Running tests for %s" % mode
+            print("Running tests for %s" % mode)
 
             sims = 1000
             part_count = (25, 50, 75, 100, 125, 150, 200) # (5, 10, 15, 20, 25, 30, 50, 75, 100, 150, 200, 300, 500)
@@ -245,9 +245,9 @@ if __name__ == '__main__':
 
 #                     if (numpy.isinf(rmse_eta[k, ind]).any() or
 #                         numpy.isnan(rmse_eta[k, ind]).any()):
-#                         print "bad sim: %d" % k
+#                         print("bad sim: %d" % k)
 #                         nanind = numpy.argmax(numpy.isnan(sqr_err_eta))
-#                         print "nanind: %d" % nanind
+#                         print("nanind: %d" % nanind)
 #                         #nanind = 57
 #                         ind = nanind-14
 #                         sind = ind - 14
@@ -288,9 +288,9 @@ if __name__ == '__main__':
                           numpy.isnan(rmse_theta[:, ind]) | numpy.isinf(rmse_theta[:, ind]) |
                           (rmse_eta[:, ind] > 10000.0) | (rmse_theta[:, ind] > 10000.0))
                 divcnt = numpy.count_nonzero(divind)
-                print "%d: (%f, %f) (%d diverged)" % (pc, numpy.mean(rmse_eta[~divind, ind]),
+                print("%d: (%f, %f) (%d diverged)" % (pc, numpy.mean(rmse_eta[~divind, ind]),
                                                       numpy.mean(rmse_theta[~divind, ind]),
-                                                      divcnt)
+                                                      divcnt))
     else:
 
         num = 50
@@ -342,4 +342,4 @@ if __name__ == '__main__':
         plt.ioff()
         plt.show()
         plt.draw()
-    print "exit"
+    print("exit")
