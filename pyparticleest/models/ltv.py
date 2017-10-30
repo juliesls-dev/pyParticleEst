@@ -16,10 +16,11 @@ import scipy.linalg
 
 class LTV(FFBSi, ParticleFiltering):
     """
-    Base class for particles of the type linear time varying with additive gaussian noise.
+    Base class for particles of the type linear time varying with additive
+    gaussian noise.
 
-    Implement this type of system by extending this class and provide the methods for returning
-    the system matrices at each time instant
+    Implement this type of system by extending this class and provide the
+    methods for returning the system matrices at each time instant
 
     z_{t+1} = A*z_t + f + v, v ~ N(0, Q)
     y_t = C*z_t + h + e, e ~ N(0,R)
